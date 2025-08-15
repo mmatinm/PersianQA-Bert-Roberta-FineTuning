@@ -2,9 +2,6 @@ import torch
 from transformers import AutoTokenizer, AutoModelForQuestionAnswering
 from peft import PeftModel, PeftConfig
 
-# -------------------------------
-# 1. Text cleaning function (same as training)
-# -------------------------------
 def clean_text(text):
     import re
     text = text.replace('ك', 'ک').replace('ي', 'ی').replace('ۀ', 'ه').replace('ة', 'ه')
@@ -23,9 +20,6 @@ def clean_text(text):
     text = re.sub(r'[A-Z]', lambda m: m.group(0).lower(), text)
     return text.strip()
 
-# -------------------------------
-# 2. Function to load either LoRA or normal model
-# -------------------------------
 def load_model(model_name, is_lora=False):
     if is_lora:
         peft_config = PeftConfig.from_pretrained(model_name)
@@ -37,9 +31,6 @@ def load_model(model_name, is_lora=False):
         model = AutoModelForQuestionAnswering.from_pretrained(model_name)
     return model, tokenizer
 
-# -------------------------------
-# 3. Function to run QA on one question/context
-# -------------------------------
 def answer_question(model, tokenizer, question, context):
     model.eval()
     inputs = tokenizer(
@@ -62,9 +53,7 @@ def answer_question(model, tokenizer, question, context):
     answer = tokenizer.decode(answer_tokens, skip_special_tokens=True)
     return clean_text(answer)
 
-# -------------------------------
-# 4. Demo
-# -------------------------------
+
 if __name__ == "__main__":
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
