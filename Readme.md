@@ -20,6 +20,7 @@ In this project, both models were further fine-tuned on **PersianQA** to improve
 ├── persianqa_bert.ipynb # Fine-tuning ParsBERT on PersianQA
 ├── PersianQA_xlm.ipynb # Fine-tuning XLM-RoBERTa on PersianQA
 ├── demo.py # Inference script to run QA with trained models
+├── demo.ipynb # Inference script to run QA with trained models ( in ipynb)
 ├── Dataset/ # Contains local copy of PersianQA dataset
 └── README.md # Project documentation
 ```
